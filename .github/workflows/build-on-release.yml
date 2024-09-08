@@ -10,12 +10,12 @@ jobs:
       - name: checkout driver
         uses: actions/checkout@v4
         with:
-          path: driver
+          path: ${{ github.workspace }}/driver
       - name: checkout metabase
         uses: actions/checkout@v4
         with:
           repository: metabase/metabase
-          path: metabase
+          path: ${{ github.workspace }}/metabase
       - name: install java
         uses: actions/setup-java@v4
         with:
@@ -27,8 +27,8 @@ jobs:
           cli: 'latest'
       - name: Build project
         run: |
-          export DRIVER_PATH=$GITHUB_WORKSPACE/driver
-          cd $GITHUB_WORKSPACE/metabase
+          export DRIVER_PATH=${{ github.workspace }}/driver
+          cd ${{ github.workspace }}/metabase
           clojure \
             -Sdeps "{:aliases {:greptimedb {:extra-deps {com.metabase/greptimedb-driver {:local/root \"$DRIVER_PATH\"}}}}}"  \
             -X:build:greptimedb \
@@ -37,6 +37,6 @@ jobs:
       - name: Release with Notes
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env:GITHUB_WORKSPACE }}/driver/target/greptimedb.metabase-driver.jar
+          files: ${{ github.workspace }}/driver/target/greptimedb.metabase-driver.jar
           generate_release_notes: true
           prerelease: false
