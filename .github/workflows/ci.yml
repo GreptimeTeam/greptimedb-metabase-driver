@@ -1,0 +1,38 @@
+name: CI
+on:
+  push:
+    - branches: [ master ]
+  pull_request:
+    - branches: [ master ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout driver
+        uses: actions/checkout@v4
+        with:
+          path: ${{ github.workspace }}/driver
+      - name: checkout metabase
+        uses: actions/checkout@v4
+        with:
+          repository: metabase/metabase
+          path: ${{ github.workspace }}/metabase
+      - name: install java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+      - name: Install clojure tools
+        uses: DeLaGuardo/setup-clojure@12.5
+        with:
+          cli: 'latest'
+      - name: build driver
+        run: |
+          export DRIVER_PATH=${{ github.workspace }}/driver
+          cd ${{ github.workspace }}/metabase
+          clojure \
+            -Sdeps "{:aliases {:greptimedb {:extra-deps {com.metabase/greptimedb-driver {:local/root \"$DRIVER_PATH\"}}}}}"  \
+            -X:build:greptimedb \
+            build-drivers.build-driver/build-driver! \
+            "{:driver :greptimedb, :project-dir \"$DRIVER_PATH\", :target-dir \"$DRIVER_PATH/target\"}"
