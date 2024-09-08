@@ -13,8 +13,8 @@ jobs:
           path: driver
       - name: checkout metabase
         uses: actions/checkout@v4
-        repository: https://github.com/metabase/metabase.git
         with:
+          repository: metabase/metabase
           path: metabase
       - name: install java
         uses: actions/setup-java@v4
