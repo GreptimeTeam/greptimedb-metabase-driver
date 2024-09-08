@@ -1,0 +1,29 @@
+# Complete list of options here: https://github.com/metabase/metabase/wiki/Metabase-Plugin-Manifest-Reference
+info:
+  name: Metabase GreptimeDB Driver
+  version: 1.0.0-greptimedb-pgjdbc
+  description: Allows Metabase to connect to GreptimeDB.
+driver:
+  name: greptimedb
+  display-name: GreptimeDB
+  lazy-load: true
+  parent: sql-jdbc
+  connection-properties:
+    - host
+    - merge:
+        - port
+        - default: 4003
+    - merge:
+        - dbname
+        - default: public
+    - merge:
+        - user
+        - required: false
+    - merge:
+        - password
+        - required: false
+init:
+  - step: load-namespace
+    namespace: metabase.driver.greptimedb
+  - step: register-jdbc-driver
+    class: org.postgresql.Driver
