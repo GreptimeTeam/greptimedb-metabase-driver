@@ -1,6 +1,6 @@
 # GreptimeDB Metabase Driver
 
-![GitHub Release](https://img.shields.io/github/v/release/sunng87/greptimedb-metabase-driver)
+![GitHub Release](https://img.shields.io/github/v/release/greptimeteam/greptimedb-metabase-driver)
 
 This is a GreptimeDB community driver plugin for
 [Metabase](https://metabase.com), an open source BI tool.
@@ -8,7 +8,7 @@ This is a GreptimeDB community driver plugin for
 ## Installation
 
 Download pre-compile jar package from [the release
-page](https://github.com/sunng87/greptimedb-metabase-driver/releases/latest/)
+page](https://github.com/greptimeteam/greptimedb-metabase-driver/releases/latest/)
 and place it in `plugins/` in the same path with your `metabase.jar`
 file. Metabase will automatically load this plugin on startup.
 
