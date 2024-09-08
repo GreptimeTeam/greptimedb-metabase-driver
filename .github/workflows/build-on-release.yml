@@ -1,5 +1,3 @@
-name: Upload artifact on release
-description: build and upload jar files on release
 on:
   push:
     tags:
