@@ -9,11 +9,13 @@ jobs:
     steps:
       - name: checkout driver
         uses: actions/checkout@v4
-        path: ./driver
+        with:
+          path: driver
       - name: checkout metabase
         uses: actions/checkout@v4
         repository: https://github.com/metabase/metabase.git
-        path: ./metabase
+        with:
+          path: metabase
       - name: install java
         uses: actions/setup-java@v4
         with:
