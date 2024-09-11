@@ -60,7 +60,7 @@
                      [:table_type :type]
                      [:table_comment :description]]
             :from [:information_schema.tables]
-            :where [:not [:in :table_schema (sql-jdbc.sync/excluded-schemas driver)]]}
+            :where [:not-in :table_schema (sql-jdbc.sync/excluded-schemas driver)]}
 
      (seq schemas)
      (sql.helpers/where [:in :table_schema schemas])
