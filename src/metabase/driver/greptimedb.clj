@@ -17,7 +17,9 @@
    [metabase.util :as u]
    [metabase.util.date-2 :as u.date]
    [metabase.util.honey-sql-2 :as h2x]
-   [metabase.util.log :as log]))
+   [metabase.util.log :as log])
+  (:import
+   [java.sql Connection]))
 
 (set! *warn-on-reflection* true)
 
@@ -200,6 +202,17 @@
 (defmethod sql-jdbc.execute/set-timezone-sql :greptimedb
   [_]
   "SET time_zone = %s;")
+
+(defmethod sql-jdbc.execute/do-with-connection-with-options :greptimedb
+  [driver db-or-id-or-spec {:keys [^String session-timezone write?], :as options} f]
+  (sql-jdbc.execute/do-with-resolved-connection
+   driver
+   db-or-id-or-spec
+   options
+   (fn [^Connection conn]
+     (when-not (sql-jdbc.execute/recursive-connection?)
+       (sql-jdbc.execute/set-time-zone-if-supported! driver conn session-timezone))
+     (f conn))))
 
 ;;; ------------------------------------------------- date functions -------------------------------------------------
 
