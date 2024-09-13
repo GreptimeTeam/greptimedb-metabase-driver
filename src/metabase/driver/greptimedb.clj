@@ -68,7 +68,8 @@
      (sql.helpers/where [:in :table_schema schemas])
 
      (seq table-names)
-     (sql.helpers/where [:in :table_name table-names]))))
+     (sql.helpers/where [:in :table_name table-names]))
+   {:inline true}))
 
 (defmethod driver/describe-database :greptimedb
   [driver database]
@@ -88,7 +89,8 @@
     :from [:information_schema.columns]
 
     :where [:and [:= :table_name table-name]
-            [:= :table_schema schema]]}))
+            [:= :table_schema schema]]}
+   {:inline true}))
 
 (defmethod driver/describe-table :greptimedb
   [driver database table]
@@ -135,7 +137,7 @@
       (sql-jdbc.common/handle-additional-options details)))
 
 (defmethod sql-jdbc.sync/excluded-schemas :greptimedb [_driver]
-  #{"greptime_private" "information_schema" "pg_catalog"})
+  ["greptime_private" "information_schema" "pg_catalog"])
 
 ;;; ------------------------------------------------- sql-jdbc.sync --------------------------------------------------
 
