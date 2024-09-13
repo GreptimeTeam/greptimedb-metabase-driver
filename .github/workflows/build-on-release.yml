@@ -55,4 +55,6 @@ jobs:
           file: ${{ github.workspace }}/driver/docker/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: greptime/metabase-greptimedb:${{  github.ref_name }}-mb050
+          tags: |
+            greptime/metabase-greptimedb:${{  github.ref_name }}-mb050
+            greptime/metabase-greptimedb:latest
