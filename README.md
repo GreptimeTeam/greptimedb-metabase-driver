@@ -5,6 +5,8 @@
 This is a GreptimeDB community driver plugin for
 [Metabase](https://metabase.com), an open source BI tool.
 
+![screenshot](screenshot.png)
+
 ## Installation
 
 Download pre-compile jar package from [the release
