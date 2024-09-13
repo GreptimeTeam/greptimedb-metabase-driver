@@ -42,3 +42,14 @@ jobs:
           generate_release_notes: true
           prerelease: false
           token: ${{ secrets.PAT }}
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - name: build docker image
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile
+          push: false
+          platforms: linux/amd64
+          tags: greptime/metabase-greptimedb:${{  github.ref_name }}-mb050
