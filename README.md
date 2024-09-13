@@ -2,8 +2,8 @@
 
 ![GitHub Release](https://img.shields.io/github/v/release/greptimeteam/greptimedb-metabase-driver)
 
-This is a GreptimeDB community driver plugin for
-[Metabase](https://metabase.com), an open source BI tool.
+This is a [GreptimeDB](https://github.com/greptimeteam/greptimedb) community
+driver plugin for [Metabase](https://metabase.com), an open source BI tool.
 
 ![screenshot](screenshot.png)
 
@@ -13,6 +13,16 @@ Download pre-compile jar package from [the release
 page](https://github.com/greptimeteam/greptimedb-metabase-driver/releases/latest/)
 and place it in `plugins/` in the same path with your `metabase.jar`
 file. Metabase will automatically load this plugin on startup.
+
+## Pre-built Metabase Image
+
+We create open source Metabase docker images with this plugin included for each
+GreptimeDB driver plugin release.
+
+```
+docker pull greptime/metabase-greptimedb:latest
+docker run -p 3000:3000 greptime/metabase-greptimedb:latest
+```
 
 ## Build
 
