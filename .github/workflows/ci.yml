@@ -19,6 +19,7 @@ jobs:
         with:
           repository: metabase/metabase
           path: ${{ github.workspace }}/metabase
+          ref: release-x.50.x
       - name: install java
         uses: actions/setup-java@v4
         with:
