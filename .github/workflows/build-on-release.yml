@@ -44,11 +44,15 @@ jobs:
           token: ${{ secrets.PAT }}
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: ${{ github.workspace }}/driver
           file: ${{ github.workspace }}/driver/docker/Dockerfile
-          push: false
+          push: true
           platforms: linux/amd64
           tags: greptime/metabase-greptimedb:${{  github.ref_name }}-mb050
