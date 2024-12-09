@@ -2,7 +2,7 @@
  ["src" "resources"]
 
  :deps
- {org.postgresql/postgresql {:mvn/version "42.7.3"}}
+ {org.postgresql/postgresql {:mvn/version "42.7.4"}}
 
  :mvn/repos
  {"opensaml" {:url "https://build.shibboleth.net/nexus/content/repositories/releases/"}}
@@ -10,4 +10,4 @@
  :aliases
  {:dev
   {:extra-deps
-   {io.github.metabase/metabase {:git/tag "v0.50.24", :git/sha "3b63317"}}}}}
+   {io.github.metabase/metabase {:git/tag "v0.52.1", :git/sha "5bc320b"}}}}}
