@@ -3,6 +3,7 @@ name: Update Metabase Version
 on:
   schedule:
     - cron: '0 4 * * 0'
+  workflow_dispatch:
 
 jobs:
   update_metabase:
