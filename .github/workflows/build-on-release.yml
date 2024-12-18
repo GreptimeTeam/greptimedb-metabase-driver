@@ -57,5 +57,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            greptime/metabase-greptimedb:v0.52.2-greptime-${{  github.ref_name }}
+            greptime/metabase-greptimedb:vv0.52.3-greptime-${{  github.ref_name }}
             greptime/metabase-greptimedb:latest
