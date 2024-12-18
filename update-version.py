@@ -26,7 +26,7 @@ def update_yaml_file(yaml_file, version):
     )
     updated_content = re.sub(
         r'metabase-greptimedb:v\d+\.\d+\.\d+(\.\d+)?',
-        f'metabase-greptimedb:v{version}',
+        f'metabase-greptimedb:{version}',
         content
     )
 
