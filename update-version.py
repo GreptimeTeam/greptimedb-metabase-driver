@@ -24,6 +24,11 @@ def update_yaml_file(yaml_file, version):
         f'ref: release-x.{minor_version}.x',
         content
     )
+    updated_content = re.sub(
+        r'metabase-greptimedb:v\d+\.\d+\.\d+(\.\d+)?',
+        f'metabase-greptimedb:v{version}',
+        content
+    )
 
     # Write the updated content back to the YAML file
     with open(yaml_file, 'w') as file:
