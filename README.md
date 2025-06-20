@@ -1,6 +1,6 @@
 # GreptimeDB Metabase Driver
 
-![GitHub Release](https://img.shields.io/github/v/release/greptimeteam/greptimedb-metabase-driver)
+[![GitHub Release](https://img.shields.io/github/v/release/greptimeteam/greptimedb-metabase-driver)](https://github.com/GreptimeTeam/greptimedb-metabase-driver/releases)
 
 This is a [GreptimeDB](https://github.com/greptimeteam/greptimedb) community
 driver plugin for [Metabase](https://metabase.com), an open source BI tool.
