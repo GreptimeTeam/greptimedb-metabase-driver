@@ -10,4 +10,4 @@
  :aliases
  {:dev
   {:extra-deps
-   {io.github.metabase/metabase {:git/tag "v0.56.2", :git/sha "75e1c0b"}}}}}
+   {io.github.metabase/metabase {:git/tag "v0.56.3", :git/sha "026cbed"}}}}}
