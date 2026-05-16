@@ -30,15 +30,14 @@ jobs:
         with:
           cli: 'latest'
 
-      - name: Cache clojure dependencies
-        uses: actions/cache@v5
+      - name: Restore clojure dependencies
+        uses: actions/cache/restore@v5
         with:
           path: |
             ~/.m2/repository
             ~/.gitlibs
             ~/.deps.clj
             ${{ github.workspace }}/metabase/.cpcache
-          # List all files containing dependencies:
           key: cljdeps-${{ hashFiles('driver/deps.edn', 'metabase/deps.edn') }}
           restore-keys: cljdeps-
 
@@ -51,3 +50,14 @@ jobs:
             -X:build:greptimedb \
             build-drivers.build-driver/build-driver! \
             "{:driver :greptimedb, :project-dir \"$DRIVER_PATH\", :target-dir \"$DRIVER_PATH/target\"}"
+
+      - name: Save clojure dependencies
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+            ~/.deps.clj
+            ${{ github.workspace }}/metabase/.cpcache
+          key: cljdeps-${{ hashFiles('driver/deps.edn', 'metabase/deps.edn') }}
