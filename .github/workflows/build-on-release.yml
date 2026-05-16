@@ -9,24 +9,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout driver
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: ${{ github.workspace }}/driver
       - name: checkout metabase
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: metabase/metabase
           path: ${{ github.workspace }}/metabase
-          ref: release-x.52.x
+          ref: release-x.60.x
       - name: install java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'adopt'
           java-version: '21'
       - name: Install clojure tools
-        uses: DeLaGuardo/setup-clojure@12.5
+        uses: DeLaGuardo/setup-clojure@13.6.0
         with:
           cli: 'latest'
+      - name: Restore clojure dependencies
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+            ~/.deps.clj
+            ${{ github.workspace }}/metabase/.cpcache
+          key: cljdeps-${{ hashFiles('driver/deps.edn', 'metabase/deps.edn') }}
+          restore-keys: cljdeps-
       - name: Build project
         run: |
           export DRIVER_PATH=${{ github.workspace }}/driver
@@ -36,6 +46,16 @@ jobs:
             -X:build:greptimedb \
             build-drivers.build-driver/build-driver! \
             "{:driver :greptimedb, :project-dir \"$DRIVER_PATH\", :target-dir \"$DRIVER_PATH/target\"}"
+      - name: Save clojure dependencies
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+            ~/.deps.clj
+            ${{ github.workspace }}/metabase/.cpcache
+          key: cljdeps-${{ hashFiles('driver/deps.edn', 'metabase/deps.edn') }}
       - name: Release with Notes
         uses: softprops/action-gh-release@v2
         with:
