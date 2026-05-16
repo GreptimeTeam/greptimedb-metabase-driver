@@ -24,11 +24,27 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '21'
-          cache: 'maven'
+
       - name: Install clojure tools
-        uses: DeLaGuardo/setup-clojure@12.5
+        uses: DeLaGuardo/setup-clojure@13.6
         with:
           cli: 'latest'
+
+      - name: Cache clojure dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+            ~/.deps.clj
+            ${{ github.workspace }}/metabase/.cpcache
+          # List all files containing dependencies:
+          key: cljdeps-${{ hashFiles('driver/deps.edn', 'metabase/deps.edn') }}
+          # key: cljdeps-${{ hashFiles('deps.edn', 'bb.edn') }}
+          # key: cljdeps-${{ hashFiles('project.clj') }}
+          # key: cljdeps-${{ hashFiles('build.boot') }}
+          restore-keys: cljdeps-
+
       - name: build driver
         run: |
           export DRIVER_PATH=${{ github.workspace }}/driver
