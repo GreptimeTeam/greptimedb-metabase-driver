@@ -17,7 +17,7 @@ jobs:
         with:
           repository: metabase/metabase
           path: ${{ github.workspace }}/metabase
-          ref: release-x.61.x
+          ref: release-x.62.x
       - name: install java
         uses: actions/setup-java@v5
         with:
@@ -77,5 +77,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            greptime/metabase-greptimedb:v0.61.3-greptime-${{  github.ref_name }}
+            greptime/metabase-greptimedb:v0.62.2-greptime-${{  github.ref_name }}
             greptime/metabase-greptimedb:latest
