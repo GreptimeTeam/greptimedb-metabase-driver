@@ -18,7 +18,7 @@ jobs:
         with:
           repository: metabase/metabase
           path: ${{ github.workspace }}/metabase
-          ref: release-x.63.x
+          ref: release-x.64.x
       - name: Check postgres jdbc driver version matches metabase
         run: |
           METABASE_TAG=$(grep -oP '(?<=:git/tag ")v[0-9.]+' driver/deps.edn)

@@ -1,3 +1,3 @@
-FROM docker.io/metabase/metabase:v0.63.17
+FROM docker.io/metabase/metabase:v0.64.1
 
 ADD ./target/greptimedb.metabase-driver.jar plugins/
